@@ -29,7 +29,7 @@ class RISParser(object):
         for t in self.tags:
             if tag == t:
                 print('Found tag: ' + tag)
-
+#Web App that analyzes RIS formatted data and tallies the IDs. Returns an Excel file.
     #finds the different ids in each record and counts each occurance
     def idOperation(self, idStr):
         newStr = idStr.split(';')
