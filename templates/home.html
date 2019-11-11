@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+        <style>
+        body {background: #555;}
+        .content {
+          max-width: 600px;
+          border-radius: 15px;
+          margin: auto;
+          background: white;
+          padding: 10px;
+        }
+        h1 {font-family: sans-serif;
+          background-color: #DDD;
+          border-radius: 15px;
+          margin: auto;
+          padding: 10px;
+          text-align: center;
+        }
+        input[type=submit], [type=file] {
+          width: 100%;
+          background-color: #D21;
+          border-radius: 25px;
+          border: none;
+          color: white;
+          padding: 16px 32px;
+          text-decoration: none;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+        input[type=text] {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          box-sizing: border-box;
+        }
+
+        </style>
+        <title>ASM RIS Analyzer</title>
+    </head>
+    <body>
+      <div class="content">
+        <h1>Select the file to be processed</h1>
+        <form
+            enctype="multipart/form-data"
+            action="{{ url_for('success') }}"
+            method="post"
+        >
+            <p><input id="chooseButton" type="file" name="uploadFile" /></p>
+            <p><input id="tfield" type="text" name="textData" placeholder="Enter tags here"/></p>
+            <p><input id="uploadButton" type="submit" value="Upload file..." /></p>
+        </form>
+      </div>
+    </body>
+</html>
