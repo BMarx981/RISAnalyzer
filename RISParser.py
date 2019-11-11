@@ -7,8 +7,6 @@ Created on Sun Nov 10 15:27:51 2019
 """
 
 class RISParser(object):
-                    
-    idDict = {}
     
     tags = ['TY','A1','A2','A3','A4','AB','AD','AN','AU','AV',
 'BT','C1','C2','C3','C4','C5','C6','C7','C8','CA','CN','CP',
@@ -69,17 +67,21 @@ class RISParser(object):
         
     def processFile(self, content, tags):
         records = self.getRecords(content)
+        newDict = {}
         for r in records:
             if len(tags) > 0:
                 for tag in tags:
                     if tag in self.tags and tag in r.keys():
                         print(tag)
                         print(r[tag])
-            
-            
-
-    def printDict(self):
-        print(self.idDict)
+            if r['ID'] in r and r['ID'] != '':
+                newStr = r['ID'].split(';')
+                newStr = [x.lstrip().rstrip() for x in newStr]
+                
+                for s in newStr:
+                    if not s in newDict: 
+                        newDict[s] = 1
+                    else:
+                        newDict[s] = newDict[s] + 1
         
-    def clearDict(self):
-        self.idDict.clear()
+        
