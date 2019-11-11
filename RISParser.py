@@ -40,23 +40,33 @@ class RISParser(object):
             else:
                 self.idDict[s] = self.idDict[s] + 1
     
-    #
     def getIDs(self, content):
         for line in content:
             if line[0:2] == 'ID':
                     self.idOperation(line[3:])
+                    
+    def getRecords(self, content):
+        records = [[]]
+        record = []
+        for line in content:
+            if not line[0:2] == 'ER':
+                if line[0:2] == '  ':
+                    newrec = record.pop() + ' ' + line.lstrip()
+                    print(newrec)
+                    record.append(newrec)
+                else :
+                    record.append(line)
+            else:
+                records.append(record)
+                record = []
+        return records
         
     def processFile(self, content, tags):
-        print(tags)
-        if len(tags) > 0: 
-            for line in content:
-                self.findTag(line[0:2])
-                for tag in tags:
-                    if line[0:2] == 'ID':
-                        self.idOperation(line[3:])
-                        
-        else:
-            self.getIDs(content)
+        
+        records = self.getRecords(content)
+        for r in records:
+            for l in r:
+                print(l)
 
     def printDict(self):
         print(self.idDict)
