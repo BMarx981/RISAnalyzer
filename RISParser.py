@@ -68,13 +68,15 @@ class RISParser(object):
         return records
         
     def processFile(self, content, tags):
-        
         records = self.getRecords(content)
         for r in records:
-            for tag in tags:
-                if tag in self.tags and tag in r.keys():
-                    print(tag)
-                    print(r[tag])
+            if len(tags) > 0:
+                for tag in tags:
+                    if tag in self.tags and tag in r.keys():
+                        print(tag)
+                        print(r[tag])
+            
+            
 
     def printDict(self):
         print(self.idDict)
