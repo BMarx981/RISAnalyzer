@@ -21,8 +21,10 @@ def home():
 def success():
     if request.method == 'POST':
         tags = str(request.form['textData']).split(' ')
+        tags = [x.replace('\\n', '').replace(',', '') for x in tags]
+        tags = list(filter(None, tags))
         content = str(request.files['uploadFile'].read().decode("utf-8-sig").encode("utf-8")).split('\\n')
-        
+        content = list(filter(None, content))
         rp.processFile(content, tags)
         rp.printDict()
         return render_template('processing.html')

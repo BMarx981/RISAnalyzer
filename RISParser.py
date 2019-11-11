@@ -26,10 +26,9 @@ class RISParser(object):
         arr = array
  
     def findTag(self, tag): 
-        for t in self.tags:
-            if tag == t:
-                print('Found tag: ' + tag)
-#Web App that analyzes RIS formatted data and tallies the IDs. Returns an Excel file.
+        if tag in self.tags:
+            print('Found tag: ' + tag)
+
     #finds the different ids in each record and counts each occurance
     def idOperation(self, idStr):
         newStr = idStr.split(';')
@@ -48,6 +47,7 @@ class RISParser(object):
                     self.idOperation(line[3:])
         
     def processFile(self, content, tags):
+        print(tags)
         if len(tags) > 0: 
             for line in content:
                 self.findTag(line[0:2])
