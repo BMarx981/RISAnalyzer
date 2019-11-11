@@ -24,10 +24,10 @@ class RISParser(object):
     def __init_(sIn, array):
         s = sIn
         arr = array
- 
-    def findTag(self, tag): 
-        if tag in self.tags:
-            print('Found tag: ' + tag)
+# 
+#    def findTag(self, tag): 
+#        if tag in self.tags:
+#            print('Found tag: ' + tag)
 
     #finds the different ids in each record and counts each occurance
     def idOperation(self, idStr):
@@ -44,29 +44,34 @@ class RISParser(object):
         for line in content:
             if line[0:2] == 'ID':
                     self.idOperation(line[3:])
-                    
+             
+    # Returns an array of dictionaries
+    # Each dictionary is a record broken up by
+    # the tag.
     def getRecords(self, content):
-        records = [[]]
-        record = []
+        records = []
+        record = {}
+        temp = ''
         for line in content:
+            
             if not line[0:2] == 'ER':
                 if line[0:2] == '  ':
-                    newrec = record.pop() + ' ' + line.lstrip()
-                    print(newrec)
-                    record.append(newrec)
+                    newrec = record[temp] + ' ' + line.lstrip()
+                    record[temp] = newrec
                 else :
-                    record.append(line)
+                    temp = line[0:2]
+                    record[temp] = line[3:]
+                    
             else:
                 records.append(record)
-                record = []
+                record = {}
         return records
         
     def processFile(self, content, tags):
         
         records = self.getRecords(content)
         for r in records:
-            for l in r:
-                print(l)
+            print(r)
 
     def printDict(self):
         print(self.idDict)

@@ -26,7 +26,6 @@ def success():
         content = str(request.files['uploadFile'].read().decode("utf-8-sig").encode("utf-8")).split('\\n')
         content = list(filter(None, content))
         rp.processFile(content, tags)
-        rp.printDict()
         return render_template('processing.html')
 
 if __name__ == '__main__':
