@@ -47,7 +47,7 @@ class RISParser(object):
              
     # Returns an array of dictionaries
     # Each dictionary is a record broken up by
-    # the tag.
+    # the tag.   ID TI SO PB PD
     def getRecords(self, content):
         records = []
         record = {}
@@ -71,7 +71,10 @@ class RISParser(object):
         
         records = self.getRecords(content)
         for r in records:
-            print(r)
+            for tag in tags:
+                if tag in self.tags and tag in r.keys():
+                    print(tag)
+                    print(r[tag])
 
     def printDict(self):
         print(self.idDict)
