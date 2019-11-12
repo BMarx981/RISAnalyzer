@@ -10,6 +10,9 @@ from openpyxl import Workbook
 
 class excelClass(object):
     
+    def __init__(self):
+        pass
+    
     wb = Workbook()
     
     def makeWorkbook(self, inputDict, title, saveTitle):

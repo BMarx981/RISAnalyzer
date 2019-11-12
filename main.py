@@ -14,7 +14,6 @@ rp = RISParser()
 
 @app.route("/")
 def home():
-    rp.clearDict()
     return render_template('home.html')
 
 @app.route("/success", methods=['GET', 'POST'])

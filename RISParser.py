@@ -5,6 +5,7 @@ Created on Sun Nov 10 15:27:51 2019
 
 @author: brianmarx
 """
+import excelClass
 
 class RISParser(object):
     
@@ -68,6 +69,7 @@ class RISParser(object):
     def processFile(self, content, tags):
         records = self.getRecords(content)
         newDict = {}
+        ec = excelClass()
         for r in records:
             if len(tags) > 0:
                 for tag in tags:
@@ -75,6 +77,7 @@ class RISParser(object):
                         print(tag)
                         print(r[tag])
             if r['ID'] in r and r['ID'] != '':
+                print('ID = ' + r['ID'])
                 newStr = r['ID'].split(';')
                 newStr = [x.lstrip().rstrip() for x in newStr]
                 
