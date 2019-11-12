@@ -5,7 +5,7 @@ Created on Sun Nov 10 15:27:51 2019
 
 @author: brianmarx
 """
-import excelClass
+from excelClass import excelClass
 
 class RISParser(object):
     
@@ -68,23 +68,28 @@ class RISParser(object):
         
     def processFile(self, content, tags):
         records = self.getRecords(content)
-        newDict = {}
+        idDict = {}
+        title = ''
         ec = excelClass()
         for r in records:
+            
             if len(tags) > 0:
                 for tag in tags:
                     if tag in self.tags and tag in r.keys():
                         print(tag)
                         print(r[tag])
-            if r['ID'] in r and r['ID'] != '':
+            if 'ID' in r and r['ID'] != '':
                 print('ID = ' + r['ID'])
+                title = r['TI']
                 newStr = r['ID'].split(';')
                 newStr = [x.lstrip().rstrip() for x in newStr]
                 
                 for s in newStr:
-                    if not s in newDict: 
-                        newDict[s] = 1
+                    if not s in idDict: 
+                        idDict[s] = 1
                     else:
-                        newDict[s] = newDict[s] + 1
+                        idDict[s] = idDict[s] + 1
+        ec.makeWorkbook(idDict, title, 'SaveTitle')
+        
         
         
