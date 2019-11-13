@@ -8,7 +8,7 @@ Created on Sun Nov 10 15:27:51 2019
 from excelClass import excelClass
 
 class RISParser(object):
-    
+    titleClass = ''
     tags = ['TY','A1','A2','A3','A4','AB','AD','AN','AU','AV',
 'BT','C1','C2','C3','C4','C5','C6','C7','C8','CA','CN','CP',
 'CT','CY','DA','DB','DO','DP','ED','EP','ET','ID','IS','J1',
@@ -35,6 +35,9 @@ class RISParser(object):
             if line[0:2] == 'ID':
                     self.idOperation(line[3:])
              
+    def getFileName(self):
+        return self.titleClass
+    
     # Returns an array of dictionaries
     # Each dictionary is a record broken up by
     # the tag.   ID TI SO PB PD
@@ -75,5 +78,6 @@ class RISParser(object):
                         idDict[s] = 1
                     else:
                         idDict[s] = idDict[s] + 1
+        self.titleClass = title
         ec.makeWorkbook(cleanTags, title, fileN, idDict, records)
         

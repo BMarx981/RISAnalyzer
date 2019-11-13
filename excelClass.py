@@ -42,4 +42,4 @@ class excelClass(object):
             ws.cell(row=row, column=2, value=v)
             row += 1
             
-        self.wb.save(title + '.xlsx')
+        self.wb.save('static/' + title + '.xlsx')
