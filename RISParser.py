@@ -62,11 +62,11 @@ class RISParser(object):
         records = self.getRecords(content)
         idDict = {}
         title = ''
-        cleanTags = list(set(tags))
+        cleanTags = sorted(set(tags))
         ec = excelClass()
         for r in records:
             if 'ID' in r and r['ID'] != '':
-                title = r['TI']
+                title = r['SO']
                 newStr = r['ID'].split(';')
                 newStr = [x.lstrip().rstrip() for x in newStr]
                 
