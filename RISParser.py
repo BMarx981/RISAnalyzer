@@ -19,15 +19,6 @@ class RISParser(object):
 
     def __init__(self):
         pass
-    
-    def __init_(sIn, array):
-        s = sIn
-        arr = array
-# 
-#    def findTag(self, tag): 
-#        if tag in self.tags:
-#            print('Found tag: ' + tag)
-
     #finds the different ids in each record and counts each occurance
     def idOperation(self, idStr):
         newStr = idStr.split(';')
@@ -66,20 +57,15 @@ class RISParser(object):
                 record = {}
         return records
         
-    def processFile(self, content, tags):
+    def processFile(self, content, tags, fileName):
+        fileN = fileName.split('.')[0]
         records = self.getRecords(content)
         idDict = {}
         title = ''
+        cleanTags = list(set(tags))
         ec = excelClass()
         for r in records:
-            
-            if len(tags) > 0:
-                for tag in tags:
-                    if tag in self.tags and tag in r.keys():
-                        print(tag)
-                        print(r[tag])
             if 'ID' in r and r['ID'] != '':
-                print('ID = ' + r['ID'])
                 title = r['TI']
                 newStr = r['ID'].split(';')
                 newStr = [x.lstrip().rstrip() for x in newStr]
@@ -89,7 +75,5 @@ class RISParser(object):
                         idDict[s] = 1
                     else:
                         idDict[s] = idDict[s] + 1
-        ec.makeWorkbook(idDict, title, 'SaveTitle')
-        
-        
+        ec.makeWorkbook(cleanTags, title, fileN, idDict, records)
         
