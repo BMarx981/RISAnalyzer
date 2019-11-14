@@ -42,6 +42,7 @@
       <div class="content">
         <div class="box">
           <p>{{ f }} uploaded</p>
+          <p>{{ d }} processing</p>
         </div>
         <div class="boxspace">
         </div>
@@ -51,7 +52,7 @@
         <div class="boxspace">
         </div>
         <div class="box">
-          <a href="{{ url_for('downloadFile') }}">Download</a>
+          <a href="{{ url_for('downloadFile', download=d) }}">Download</a>
         </div>
       </div>
     </body>

@@ -7,7 +7,7 @@ Created on Fri Nov  8 11:25:57 2019
 """
 # AU AF TI SO DT DE ID PY VL IS DI PG UT
 
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_from_directory
 from RISParser import RISParser
 
 app = Flask(__name__, static_folder='static')
@@ -35,12 +35,14 @@ def success():
         content = str(f.read().decode("utf-8-sig").encode("utf-8")).split('\\n')
         content = list(filter(None, content))
         rp.processFile(content, tags, fileN)
-        return render_template('processing.html', f=fileN)
+        newShit = rp.getFileName() + '.xlsx'
+        return render_template('processing.html', f=fileN, d=newShit)
 
-@app.route("/download")
-def downloadFile():
-    fi = rp.getFileName() + '.xlsx'
-    return send_file(app.static_folder, attachment_filename=fi)
+@app.route("/download/<download>")
+def downloadFile(download):
+    
+    print(download)
+    return send_from_directory('static', filename=download)
 
 if __name__ == '__main__':
     app.run(debug=True)
