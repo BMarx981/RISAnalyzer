@@ -26,6 +26,7 @@ def success():
     if request.method == 'POST':
         tags = str(request.form['textData']).split(' ')
         tags = [x.replace('\\n', '').replace(',', '') for x in tags]
+        tags = [x.upper() for x in tags]
         tags = list(filter(None, tags))
         ta = ''
         for s in tags:

@@ -69,7 +69,7 @@ class RISParser(object):
         ec = excelClass()
         for r in records:
             if 'ID' in r and r['ID'] != '':
-                title = r['SO']
+                title = r['SO'].replace(' ', '')
                 newStr = r['ID'].split(';')
                 newStr = [x.lstrip().rstrip() for x in newStr]
                 
