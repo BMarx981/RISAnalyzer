@@ -15,9 +15,11 @@ rp = RISParser()
 ta = ''.format('UTF-8')
 fileN = None
 
+
 @app.route("/")
 def home():
     return render_template('home.html', ta=ta)
+
 
 @app.route("/success", methods=['GET', 'POST'])
 def success():
@@ -39,12 +41,12 @@ def success():
         newShit = rp.getFileName() + '.xlsx'
         return render_template('processing.html', f=fileN, d=newShit)
 
+
 @app.route("/download/<download>")
 def downloadFile(download):
-    
     print(download)
     return send_from_directory('static', filename=download)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
-    
