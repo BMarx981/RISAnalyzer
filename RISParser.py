@@ -19,6 +19,8 @@ class RISParser(object):
 
     def __init__(self):
         pass
+
+
     #finds the different ids in each record and counts each occurance
     def idOperation(self, idStr):
         newStr = idStr.split(';')
@@ -80,4 +82,3 @@ class RISParser(object):
                         idDict[s] = idDict[s] + 1
         self.titleClass = title
         ec.makeWorkbook(cleanTags, title, fileN, idDict, records)
-        
